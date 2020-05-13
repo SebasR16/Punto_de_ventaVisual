@@ -108,7 +108,7 @@ namespace Punto_de_venta
             int existencia = p.Existencia - compras;
             decimal precio = p.Precio;
             //int precio = p.Precio;
-
+            Console.Write("Aqui esta el precio" + precio);
             string query = "UPDATE producto SET existencia =" + existencia + " WHERE id = " + Id;
 
             if (this.OpenConnection() == true)

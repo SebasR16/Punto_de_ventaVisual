@@ -46,13 +46,18 @@ namespace Punto_de_venta
                             }
                             else
                             {
+                                
                                 Productos p = productos[i];
-                                dataGridView1.Rows.Add(p.Nombre, p.Marca, p.Descripcion, (float)p.Precio , arre[0]);
+                                Console.Write("Aqui esta el subtotal:   "+ p.Precio * decimal.Parse(arre[0]));
+                                dataGridView1.Rows.Add(p.Nombre, p.Marca, p.Descripcion, p.Precio, arre[0], p.Precio*decimal.Parse(arre[0]));
                                 total();
                                 c.Reduce(p, int.Parse(arre[0]));
+                                vendidos.Add(p);
                             }
 
                         }
+                        
+
                     }
                     catch
                     {
@@ -86,14 +91,14 @@ namespace Punto_de_venta
                         else
                         {
                             Productos p = productos[i];
-                            dataGridView1.Rows.Add(p.Nombre, p.Marca, p.Descripcion, (float)p.Precio, "1");
+                            dataGridView1.Rows.Add(p.Nombre, p.Marca, p.Descripcion, p.Precio, "1",p.Precio);
                             total();
                             c.Reduce(p, 1);
                             vendidos.Add(p);
                         }
 
                     }
-
+                    
                 }
 
 
@@ -104,11 +109,11 @@ namespace Punto_de_venta
 
         private float total()
         {
-            float total = 0.0f;
+            float total = 0.00f;
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
                 Console.WriteLine("Rows = " + dataGridView1.Rows.Count);
-                total += float.Parse(dataGridView1[3, i].Value.ToString());
+                total += float.Parse(dataGridView1[5, i].Value.ToString());
                 Console.WriteLine("Total = " + total);
             }
             label3.Text = "Total = " + total;
@@ -130,6 +135,7 @@ namespace Punto_de_venta
         
         private void Form1_Load(object sender, EventArgs e)
         {
+            
             label1.Location = new Point((this.Width/2)-(label1.Width/2),0);
             label2.Text = DateTime.Now.ToLongDateString()+" "+ DateTime.Now.ToLongTimeString();
             
@@ -161,7 +167,7 @@ namespace Punto_de_venta
 
         private void Form1_Resize(object sender, EventArgs e)
         {
-            Form1_Load(sender, e); //Hace la ventana responsiva
+            Form1_Load(sender, e);
         }
 
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
@@ -191,7 +197,7 @@ namespace Punto_de_venta
             {
                 if (dataGridView1.Rows.Count > 0)
                 {
-                    MessageBox.Show("Termine su venta antes de salir del sistema");
+                    MessageBox.Show("Es necesario terminar la venta antes de salir del sistema");
                     textBox1.Clear();
                 }
                 else
