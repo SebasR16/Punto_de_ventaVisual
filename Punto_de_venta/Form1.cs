@@ -89,7 +89,7 @@ namespace Punto_de_venta
                             dataGridView1.Rows.Add(p.Nombre, p.Marca, p.Descripcion, (float)p.Precio, "1");
                             total();
                             c.Reduce(p, 1);
-                            //vendidos.Add(p);
+                            vendidos.Add(p);
                         }
 
                     }
@@ -119,9 +119,7 @@ namespace Punto_de_venta
         public Form1()
         {
             InitializeComponent();
-            Console.WriteLine("Before Connection");
             c = new Conexion();
-            Console.WriteLine("After connection");
             productos = c.getProductos();
             vendidos = new List<Productos>();
             for (int i = 0; i < productos.Count; i++)

@@ -43,68 +43,13 @@ namespace Punto_de_venta
         {
             try
             {
-                Console.WriteLine("IT DOES ENTER TO OPENCONNECTION");
                 connection.Open();
-                Console.WriteLine("IT DOES OPEN THE CONNECTION");
+                Console.WriteLine("Se conecto");
                 return true;
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine("IT DOES OPEN THE CATCH " + ex.Number);
-                //When handling errors, you can your application's response based 
-                //on the error number.
-                //The two most common error numbers when connecting are as follows:
-                //0: Cannot connect to server.
-                //1045: Invalid user name and/or password.
-                /*switch (ex.Number)
-                {
-                    case 0:
-                        try
-                        {
-                            Console.WriteLine("IT DOES ENTER CASE 0");
-                            MessageBox.Show("Cannot connect to server.  Working on local server.");
-                            connection = new MySqlConnection("SERVER=192.168.0.12; PORT=3307; DATABASE=tiendaisi; UID=usr217210185; PWD=pw217210185;");
-
-                            connection.Open();
-
-                        }
-                        catch (MySqlException e)
-                        {
-                            switch (e.Number)
-                            {
-                                case 0:
-                                    MessageBox.Show("Can't connect to local server either.");
-                                    break;
-                            }
-                        }
-                        return true;
-                        break;
-
-                    case 1045:
-                        MessageBox.Show("Invalid username/password, please try again");
-                        break;
-                    case 1042:
-                        try
-                        {
-                            Console.WriteLine("IT DOES ENTER CASE 0");
-                            MessageBox.Show("Cannot connect to server.  Working on local server.");
-                            connection = new MySqlConnection("SERVER=192.168.0.12; PORT=3307; DATABASE=tiendaisi; UID=usr217210185; PWD=pw217210185;");
-
-                            connection.Open();
-
-                        }
-                        catch (MySqlException e)
-                        {
-                            switch (e.Number)
-                            {
-                                case 0:
-                                    MessageBox.Show("Can't connect to local server either.");
-                                    break;
-                            }
-                        }
-                        return true;
-                        break;
-                }*/
+                Console.WriteLine(ex.Number);
                 return false;
             }
         }
@@ -126,13 +71,11 @@ namespace Punto_de_venta
         public List<Productos> getProductos()
         {
             String query = "SELECT * FROM producto";
-            Console.WriteLine("IT DOES ENTER TO GETPRODUCTOS");
             List<Productos> productos = new List<Productos>();
 
 
             if (this.OpenConnection() == true)
             {
-                Console.WriteLine("IT DOES ENTER TO GP IF");
                 MySqlCommand cmd = new MySqlCommand(query, connection);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
